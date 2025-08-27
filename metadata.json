@@ -1,0 +1,6 @@
+{
+  "name": "WhatsApp Parent Communicator",
+  "description": "An application to facilitate communication with student parents via WhatsApp, allowing for both individual and bulk messaging.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
