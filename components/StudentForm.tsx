@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { PlusIcon } from './icons';
-import type { Student } from '../types';
+import { PlusIcon } from './icons.tsx';
+import type { Student } from '../types.ts';
 
 interface StudentFormProps {
   addStudent: (student: Omit<Student, 'id'>) => void;

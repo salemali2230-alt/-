@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import type { Student } from '../types';
-import { SendIcon, WhatsAppIcon } from './icons';
+import type { Student } from '../types.ts';
+import { SendIcon, WhatsAppIcon } from './icons.tsx';
 
 interface IndividualMessageModalProps {
   student: Student | null;

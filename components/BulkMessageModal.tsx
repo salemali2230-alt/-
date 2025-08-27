@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import type { Student } from '../types';
-import { WhatsAppIcon, CheckIcon } from './icons';
+import type { Student } from '../types.ts';
+import { WhatsAppIcon, CheckIcon } from './icons.tsx';
 
 interface BulkMessageModalProps {
   isOpen: boolean;

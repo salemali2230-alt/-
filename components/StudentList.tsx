@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import type { Student } from '../types';
-import { TrashIcon, SendIcon, WhatsAppIcon } from './icons';
+import type { Student } from '../types.ts';
+import { TrashIcon, SendIcon, WhatsAppIcon } from './icons.tsx';
 
 interface StudentListProps {
   students: Student[];

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { InfoIcon } from './icons';
+import { InfoIcon } from './icons.tsx';
 
 interface AlertProps {
   message: string;

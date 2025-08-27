@@ -1,13 +1,13 @@
 
 import React, { useState } from 'react';
-import type { Student } from './types';
-import Alert from './components/Alert';
-import StudentForm from './components/StudentForm';
-import StudentList from './components/StudentList';
-import IndividualMessageModal from './components/IndividualMessageModal';
-import BulkMessageModal from './components/BulkMessageModal';
-import { WhatsAppIcon } from './components/icons';
-import OfflineGame from './components/OfflineGame';
+import type { Student } from './types.ts';
+import Alert from './components/Alert.tsx';
+import StudentForm from './components/StudentForm.tsx';
+import StudentList from './components/StudentList.tsx';
+import IndividualMessageModal from './components/IndividualMessageModal.tsx';
+import BulkMessageModal from './components/BulkMessageModal.tsx';
+import { WhatsAppIcon } from './components/icons.tsx';
+import OfflineGame from './components/OfflineGame.tsx';
 
 const App: React.FC = () => {
   const [isOnline, setIsOnline] = useState(() => navigator.onLine);
