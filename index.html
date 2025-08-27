@@ -6,19 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>تواصل مع أولياء الأمور</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Babel for on-the-fly transpilation -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- SystemJS Import Map for dependencies -->
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@^19.1.1",
+          "react-dom/client": "https://esm.sh/react-dom@^19.1.1/client"
+        }
+      }
+    </script>
+    
+    <!-- SystemJS module loader -->
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.14.3/dist/s.min.js"></script>
+    
   <script type="importmap">
 {
   "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
-    "react/": "https://esm.sh/react@^19.1.1/",
-    "react": "https://esm.sh/react@^19.1.1"
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
   }
 }
 </script>
 </head>
   <body>
     <div id="root"></div>
-    <script type="text/babel" data-type="module" src="index.tsx"></script>
+    <script>
+      (function () {
+        const originalFetch = window.fetch;
+        // Override fetch to transpile TSX/TS files
+        window.fetch = function (url, options) {
+          const fileUrl = url.toString();
+          const isTranspilable = fileUrl.endsWith('.tsx') || fileUrl.endsWith('.ts');
+          
+          if (!isTranspilable) {
+            return originalFetch(url, options);
+          }
+          
+          return originalFetch(url, options)
+            .then(function (res) {
+              if (!res.ok) {
+                // Pass through network errors
+                return res;
+              }
+              return res.text();
+            })
+            .then(function (source) {
+              // If it was an error response, don't try to transpile
+              if (source instanceof Response) {
+                  return source;
+              }
+
+              // Transpile using Babel
+              const { code } = Babel.transform(source, {
+                presets: ['react', 'typescript'],
+                filename: fileUrl // for better error messages
+              });
+              
+              // Return transpiled code as a JavaScript module
+              return new Response(new Blob([code], { type: 'application/javascript' }));
+            });
+        };
+      })();
+      
+      // Start the application
+      System.import('./index.tsx').catch(console.error);
+    </script>
   </body>
 </html>
